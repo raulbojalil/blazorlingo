@@ -1,0 +1,65 @@
+﻿@inherits SessionViewerComponent
+
+<div class="p-8 flex justify-center text-white">
+
+    <div class="w-full max-w-6xl">
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flex flip-card-front bg-blue-600 shadow-md text-5xl text-white rounded-lg items-center text-center justify-center p-5">
+
+                    @if (!loading)
+                    {
+                        <div class="absolute text-2xl top-0 right-0 m-3">
+                            @(challengeIndex + 1)/@currentSession?.Challenges.Length
+                        </div>
+                    }
+
+                    <div>@currentChallenge.Question</div>
+
+                </div>
+                <div class="flex flip-card-back text-center items-center justify-center shadow-md p-5 bg-gray-400 text-gray-800 text-lg rounded-lg">
+                    @currentChallenge.Answer
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<button @onclick="Continue" class="@(loading ? "invisible" : "") text-blue-500 p-3 hover:text-blue-800">CONTINUE</button>
+
+
+<style>
+
+    .flip-card {
+        width: 400px;
+        height: 600px;
+        perspective: 1000px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+    }
+</style>

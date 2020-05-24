@@ -1,0 +1,17 @@
+﻿@inherits LangNavComponent
+
+<div class="md:fixed w-full md:max-w-xs h-full overflow-y-auto">
+    <ul>
+        @foreach (var item in courses)
+        {
+            <li style="cursor: pointer" class="@(currentCourse?.Id == item.Id ? "shadow-md rounded bg-blue-800" : "") flex items-center hover:text-blue-800 m-1 pt-2 pb-2 pl-3" @onclick="@(e => LoadCourse(item))">
+
+                <Flag CountryCode="@item.LearningLanguage"></Flag>
+                <div class="flex flex-col ml-3">
+                    <span class="font-bold">@item.Title</span>
+                    <span class="text-xs">@item.Xp XP</span>
+                </div>
+            </li>
+        }
+    </ul>
+</div>
